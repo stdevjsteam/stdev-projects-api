@@ -1,0 +1,7 @@
+{
+  "development": {
+    "url": "postgres://sasun:7777@localhost:5432/test",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
