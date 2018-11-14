@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { database } from '../db/database';
 import { BaseController } from '../shared/base.controller';
-import { PublicProjectsService } from '../services/public-projects.service';
+import { ExampleProjectsService } from '../services/example-projects.service';
 
-export class PublicProjectsController extends BaseController<PublicProjectsService> {
+export class ExampleProjectsController extends BaseController<ExampleProjectsService> {
   
   constructor () {
-    super(new PublicProjectsService(database.db.PublicProjects));
+    super(new ExampleProjectsService(database.db.ExampleProjects));
   }
 
   public async addProject(req: Request, res: Response): Promise<void> {

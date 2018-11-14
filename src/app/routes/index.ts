@@ -1,18 +1,21 @@
 import { Routing } from './routing';
-import { ProjectsRouter } from './projects-router';
+import { PublicProjectsRouter } from './public-projects-router';
+import { ExampleProjectsRouter } from './example-projects-router';
 
 export class Routes extends Routing {
-  private projectsRouter: ProjectsRouter;
+  private publicProjectsRouter: PublicProjectsRouter;
+  private exampleProjectsRouter: ExampleProjectsRouter;
 
   constructor() {
     super();
   }
 
   init(): void {
-    this.projectsRouter = new ProjectsRouter();
+    this.publicProjectsRouter = new PublicProjectsRouter();
+    this.exampleProjectsRouter = new ExampleProjectsRouter();
   }
 
   route(): void {
-    this.router.use('/projects/', this.projectsRouter.router);
+    this.router.use('/projects/', this.publicProjectsRouter.router);
   }
 }

@@ -2,7 +2,7 @@ import { SequelizeAttributes } from '../types';
 import { Sequelize, Instance, INTEGER, STRING } from 'sequelize';
 import { PublicProjectsAttributes } from '../types/project';
 
-export type ProjectInstance = Instance<PublicProjectsAttributes> & PublicProjectsAttributes;
+export type PublicProjectInstance = Instance<PublicProjectsAttributes> & PublicProjectsAttributes;
 
 export default (sequalize: Sequelize) => {
   const attributes: SequelizeAttributes<PublicProjectsAttributes> = {
@@ -24,5 +24,5 @@ export default (sequalize: Sequelize) => {
       allowNull: false
     }
   };
-  return sequalize.define<ProjectInstance, PublicProjectsAttributes>('Public_projects', attributes);
+  return sequalize.define<PublicProjectInstance, PublicProjectsAttributes>('Public_projects', attributes);
 };

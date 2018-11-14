@@ -1,13 +1,13 @@
 import * as Sequelize from 'sequelize';
 
 import { BaseService } from '../shared/base.service';
-import { ProjectInstance } from '../models/public-projects.model';
-import { IResult } from '../types/result.d';
+import { PublicProjectInstance } from '../models/public-projects.model';
+import { IResult } from '../types/result';
 import { PublicProjectsAttributes } from '../types/project';
 
-export class ProjectsService extends BaseService<ProjectInstance, PublicProjectsAttributes> {
+export class PublicProjectsService extends BaseService<PublicProjectInstance, PublicProjectsAttributes> {
 
-  constructor(model: Sequelize.Model<ProjectInstance, PublicProjectsAttributes>) {
+  constructor(model: Sequelize.Model<PublicProjectInstance, PublicProjectsAttributes>) {
     super(model);
   }
 

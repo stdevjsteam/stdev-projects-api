@@ -1,13 +1,13 @@
 import * as Sequelize from "sequelize";
 
-import publicProjectsFactory, { ProjectInstance } from "../models/public-projects.model";
+import publicProjectsFactory, { PublicProjectInstance } from "../models/public-projects.model";
 import { PublicProjectsAttributes, ExampleProjectsAttributes } from "../types/project";
 import exampleProjectsFactory, { ExampleProjectsInstance } from "../models/example-projects.model";
 
 export interface IDB {
   sequelize?: Sequelize.Sequelize;
   Sequelize?: Sequelize.SequelizeStatic;
-  PublicProjects?: Sequelize.Model<ProjectInstance, PublicProjectsAttributes>;
+  PublicProjects?: Sequelize.Model<PublicProjectInstance, PublicProjectsAttributes>;
   ExampleProjects?: Sequelize.Model<ExampleProjectsInstance, ExampleProjectsAttributes>;
 }
 
