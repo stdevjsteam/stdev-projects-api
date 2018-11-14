@@ -16,6 +16,7 @@ export class Routes extends Routing {
   }
 
   route(): void {
-    this.router.use('/projects/', this.publicProjectsRouter.router);
+    this.router.use('/public-projects/', this.publicProjectsRouter.router);
+    this.router.use('/example-projects/', this.exampleProjectsRouter.router);
   }
 }
