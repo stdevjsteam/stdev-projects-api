@@ -1,20 +1,22 @@
 import * as Sequelize from 'sequelize';
+
 import { BaseService } from '../shared/base.service';
-import { ProjectInstance, ProjectAttributes } from '../models/projects.model';
+import { ProjectInstance } from '../models/public-projects.model';
 import { IResult } from '../types/result.d';
+import { PublicProjectsAttributes } from '../types/project';
 
-export class ProjectsService extends BaseService<ProjectInstance, ProjectAttributes> {
+export class ProjectsService extends BaseService<ProjectInstance, PublicProjectsAttributes> {
 
-  constructor(model: Sequelize.Model<ProjectInstance, ProjectAttributes>) {
+  constructor(model: Sequelize.Model<ProjectInstance, PublicProjectsAttributes>) {
     super(model);
   }
 
-  public async addProject (project: ProjectAttributes): Promise<IResult> {
-    return this.model.findOne({ where: { name: project.name } }).then((existingProject: ProjectAttributes) => {
+  public async addProject (project: PublicProjectsAttributes): Promise<IResult> {
+    return this.model.findOne({ where: { name: project.name } }).then((existingProject: PublicProjectsAttributes) => {
       if(existingProject) {
         return this.getResult(422, null, false, 'Project with this name does already exists.');
       } else {
-        return this.addItem(project).then((newProject: ProjectAttributes) => {
+        return this.addItem(project).then((newProject: PublicProjectsAttributes) => {
           return this.getResult(201, null, true, 'Project has been successfully added', newProject);
         })
       }
@@ -22,7 +24,7 @@ export class ProjectsService extends BaseService<ProjectInstance, ProjectAttribu
   }
 
   public async getAllProjects (): Promise<IResult> {
-    return this.getAll().then((projects: ProjectAttributes[]) => {
+    return this.getAll().then((projects: PublicProjectsAttributes[]) => {
       return this.getResult(200, null, true, '', projects);
     });
   }

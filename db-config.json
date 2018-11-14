@@ -1,6 +1,6 @@
 {
   "development": {
-    "url": "postgres://sasun:7777@localhost:5432/test",
+    "url": "postgres://postgres:7777@localhost:5432/stdev-projects",
     "dialect": "postgres",
     "operatorsAliases": false
   }

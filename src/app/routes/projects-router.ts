@@ -1,15 +1,15 @@
 import { Routing } from './routing';
-import { ProjectsController } from '../controllers/projects.controller';
+import { PublicProjectsController } from '../controllers/public-projects.controller';
 
 export class ProjectsRouter extends Routing {
-  private projectsController: ProjectsController;
+  private projectsController: PublicProjectsController;
   
   constructor() {
     super();
   }
 
   init() {
-    this.projectsController = new ProjectsController();
+    this.projectsController = new PublicProjectsController();
   }
 
   route(): void {

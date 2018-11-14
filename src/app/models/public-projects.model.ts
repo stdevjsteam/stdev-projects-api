@@ -1,17 +1,11 @@
 import { SequelizeAttributes } from '../types';
 import { Sequelize, Instance, INTEGER, STRING } from 'sequelize';
+import { PublicProjectsAttributes } from '../types/project';
 
-export interface ProjectAttributes {
-  readonly id?: string;
-  name: string;
-  technology: string;
-  developers: string;
-}
-
-export type ProjectInstance = Instance<ProjectAttributes> & ProjectAttributes;
+export type ProjectInstance = Instance<PublicProjectsAttributes> & PublicProjectsAttributes;
 
 export default (sequalize: Sequelize) => {
-  const attributes: SequelizeAttributes<ProjectAttributes> = {
+  const attributes: SequelizeAttributes<PublicProjectsAttributes> = {
     id: {
       type: INTEGER,
       primaryKey: true,
@@ -19,8 +13,7 @@ export default (sequalize: Sequelize) => {
     },
     name: {
       type: STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
     },
     technology: {
       type: STRING,
@@ -31,5 +24,5 @@ export default (sequalize: Sequelize) => {
       allowNull: false
     }
   };
-  return sequalize.define<ProjectInstance, ProjectAttributes>('Projects', attributes);
+  return sequalize.define<ProjectInstance, PublicProjectsAttributes>('Public_projects', attributes);
 };

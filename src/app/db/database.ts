@@ -1,10 +1,14 @@
 import * as Sequelize from "sequelize";
-import projectFactory, { ProjectInstance, ProjectAttributes } from "../models/projects.model";
+
+import publicProjectsFactory, { ProjectInstance } from "../models/public-projects.model";
+import { PublicProjectsAttributes, ExampleProjectsAttributes } from "../types/project";
+import exampleProjectsFactory, { ExampleProjectsInstance } from "../models/example-projects.model";
 
 export interface IDB {
   sequelize?: Sequelize.Sequelize;
   Sequelize?: Sequelize.SequelizeStatic;
-  Projects?: Sequelize.Model<ProjectInstance, ProjectAttributes>;
+  PublicProjects?: Sequelize.Model<ProjectInstance, PublicProjectsAttributes>;
+  ExampleProjects?: Sequelize.Model<ExampleProjectsInstance, ExampleProjectsAttributes>;
 }
 
 class Database {
@@ -14,14 +18,15 @@ class Database {
   public db: IDB = {};
 
   constructor() {
-    this.sequelize = new Sequelize(process.env.DATABASE_URL || process.env.DATABSE_CONNECTION_URI, {
+    this.sequelize = new Sequelize(process.env.DATABASE_URL || this.config.url, {
       "dialect": "postgres",
       "operatorsAliases": false
     });
     this.db = {
       sequelize: this.sequelize,
       Sequelize,
-      Projects: projectFactory(this.sequelize)
+      PublicProjects: publicProjectsFactory(this.sequelize),
+      ExampleProjects: exampleProjectsFactory(this.sequelize)
     };
 
     Object.values(this.db).forEach((model: any) => {

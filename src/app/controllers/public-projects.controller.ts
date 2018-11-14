@@ -3,10 +3,10 @@ import { database } from '../db/database';
 import { BaseController } from '../shared/base.controller';
 import { ProjectsService } from '../services/projects.service';
 
-export class ProjectsController extends BaseController<ProjectsService> {
+export class PublicProjectsController extends BaseController<ProjectsService> {
   
   constructor () {
-    super(new ProjectsService(database.db.Projects));
+    super(new ProjectsService(database.db.PublicProjects));
   }
 
   public async addProject(req: Request, res: Response): Promise<void> {
