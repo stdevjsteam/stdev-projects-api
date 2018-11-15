@@ -2,13 +2,16 @@ import * as Sequelize from "sequelize";
 
 import publicProjectsFactory, { PublicProjectInstance } from "../models/public-projects.model";
 import { PublicProjectsAttributes, ExampleProjectsAttributes } from "../types/project";
+import { UserAttributes } from "../types/user";
 import exampleProjectsFactory, { ExampleProjectsInstance } from "../models/example-projects.model";
+import usersFactory, { UsersInstance } from "../models/users.model";
 
 export interface IDB {
   sequelize?: Sequelize.Sequelize;
   Sequelize?: Sequelize.SequelizeStatic;
   PublicProjects?: Sequelize.Model<PublicProjectInstance, PublicProjectsAttributes>;
   ExampleProjects?: Sequelize.Model<ExampleProjectsInstance, ExampleProjectsAttributes>;
+  Users?: Sequelize.Model<UsersInstance, UserAttributes>;
 }
 
 class Database {
@@ -26,7 +29,8 @@ class Database {
       sequelize: this.sequelize,
       Sequelize,
       PublicProjects: publicProjectsFactory(this.sequelize),
-      ExampleProjects: exampleProjectsFactory(this.sequelize)
+      ExampleProjects: exampleProjectsFactory(this.sequelize),
+      Users: usersFactory(this.sequelize)
     };
 
     Object.values(this.db).forEach((model: any) => {

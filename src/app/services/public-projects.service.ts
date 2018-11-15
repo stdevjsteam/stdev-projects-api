@@ -20,7 +20,7 @@ export class PublicProjectsService extends BaseService<PublicProjectInstance, Pu
           return this.getResult(201, null, true, 'Project has been successfully added', newProject);
         })
       }
-    })
+    });
   }
 
   public async getAllProjects (): Promise<IResult> {
