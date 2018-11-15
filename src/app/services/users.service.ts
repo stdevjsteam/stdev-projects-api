@@ -22,8 +22,12 @@ export class UsersService extends BaseService<UsersInstance, UserAttributes> {
     return this.model.findOne({ where: { email: user.email } }).then(async (existingUser: UserAttributes) => {
       if(existingUser) {
         if(await passwordCompare(user.password, existingUser.password)) {
-          const user =  new UserModel(existingUser.email, existingUser.password, existingUser.id, await this.createToken(existingUser.id));
-          return this.getResult(200, null, true, '', user);
+          const result = {
+            email: existingUser.email,
+            isAdmin: existingUser.isAdmin,
+            token: await this.createToken(existingUser.id)
+          }
+          return this.getResult(200, null, true, '', result);
         }
       } else {
         return this.getResult(401, null, false, 'Email or password is incorrect');
@@ -36,9 +40,9 @@ export class UsersService extends BaseService<UsersInstance, UserAttributes> {
       if(existingUser) {
         return this.getResult(422, null, false, 'This email already exists')
       } else {
-        const newUser = new UserModel(user.email, await passwordHash(user.password, 10));
-        return this.addItem(newUser).then((newUser: UserAttributes) => {
-          return this.getResult(201, null, true, 'Project has been successfully added', newUser);
+        const newUser = new UserModel(user.email, await passwordHash(user.password, 10), user.isAdmin);
+        return this.addItem(newUser).then(() => {
+          return this.getResult(201, null, true, 'User has been successfully registered');
         })
       }
     });

@@ -1,4 +1,4 @@
-import { Sequelize, Instance, INTEGER, STRING } from 'sequelize';
+import { Sequelize, Instance, INTEGER, STRING, BOOLEAN } from 'sequelize';
 
 import { SequelizeAttributes } from '../types';
 import { UserAttributes } from '../types/user';
@@ -7,8 +7,7 @@ export class UserModel implements UserAttributes {
   constructor(
       public email: string,
       public password: string,
-      public id?: number,
-      public token?: string
+      public isAdmin: boolean
   ) {}
 }
 
@@ -29,7 +28,12 @@ export default (sequalize: Sequelize) => {
     password: {
       type: STRING,
       allowNull: false
-    }
+    },
+    isAdmin: {
+      type: BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
   };
   return sequalize.define<UsersInstance, UserAttributes>('users', attributes);
 };
