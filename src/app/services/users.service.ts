@@ -27,7 +27,7 @@ export class UsersService extends BaseService<UsersInstance, UserAttributes> {
             isAdmin: existingUser.isAdmin,
             token: await this.createToken(existingUser.id)
           }
-          return this.getResult(200, null, true, '', result);
+          return this.getResult(200, null, true, '', [result]);
         }
       } else {
         return this.getResult(401, null, false, 'Email or password is incorrect');
