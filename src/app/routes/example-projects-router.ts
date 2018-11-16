@@ -1,5 +1,6 @@
 import { Routing } from './routing';
 import { ExampleProjectsController } from '../controllers/example-projects.controller';
+import { PassportMiddleWare } from '../middlewares/passport';
 
 export class ExampleProjectsRouter extends Routing {
   private exampleProjectsController: ExampleProjectsController;
@@ -20,6 +21,6 @@ export class ExampleProjectsRouter extends Routing {
 
     // this.router.put('/',       this.projectsController.getProjects.bind(this.projectsController));    // Update
 
-    this.router.delete('/:id', this.exampleProjectsController.removeProject.bind(this.exampleProjectsController));  // Delete
+    this.router.delete('/:id', PassportMiddleWare.passport.authenticate('jwt', { session: false }), this.exampleProjectsController.removeProject.bind(this.exampleProjectsController));  // Delete
   }
 }

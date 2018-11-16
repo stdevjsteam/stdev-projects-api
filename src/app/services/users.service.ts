@@ -47,4 +47,8 @@ export class UsersService extends BaseService<UsersInstance, UserAttributes> {
       }
     });
   }
+
+  public async getUser(id: number): Promise<UserAttributes> {
+    return await this.getById(id);
+  }
 }
