@@ -18,7 +18,7 @@ export class ExampleProjectsController extends BaseController<ExampleProjectsSer
   }
 
   public async removeProject(req: Request, res: Response): Promise<void> {
-    this.handle(this.service.removeProject(+req.params.id), res);
+    this.handle(this.service.removeProject(req.user, +req.params.id), res);
   }
 
 }

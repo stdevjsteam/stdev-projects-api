@@ -23,7 +23,8 @@ class Database {
   constructor() {
     this.sequelize = new Sequelize(process.env.DATABASE_URL || this.config.url, {
       "dialect": "postgres",
-      "operatorsAliases": false
+      "operatorsAliases": false,
+      "logging": false
     });
     this.db = {
       sequelize: this.sequelize,

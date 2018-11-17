@@ -9,6 +9,12 @@ export abstract class BaseService<TInstance, TAttributes> {
     return await this.model.create(item);
   }
 
+  protected async getByParam(params: Sequelize.WhereOptions<TAttributes>) {
+    return await this.model.findOne({
+      where: params
+    })
+  }
+
   protected async getById(id: number) {
     return await this.model.findById(id);
   }

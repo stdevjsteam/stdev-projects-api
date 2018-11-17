@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import { json } from 'body-parser';
 import { Routes } from './routes/index';
 import { database } from './db/database';
+import { PassportMiddleWare } from './middlewares/passport';
 
 export class App {
   private routes: Routes;
@@ -24,6 +25,8 @@ export class App {
     this.expressApp.use(cors(this.corsOptions));
     this.expressApp.use(json());
 
+    PassportMiddleWare.useStrategy();
+    this.expressApp.use(PassportMiddleWare.passport.initialize());
     this.routes = new Routes();
     this.expressApp.use('/api', this.routes.router);
     this.expressApp.use('*', (req, res) => {

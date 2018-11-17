@@ -30,8 +30,8 @@ export class ExampleProjectsService extends BaseService<ExampleProjectsInstance,
     });
   }
 
-  public async removeProject (id: number): Promise<IResult> {
-    return this.removeItem(id).then((count: number) => {
+  public async removeProject (userId: number, projectId: number): Promise<IResult> {
+    return this.removeItem(projectId).then((count: number) => {
       return this.getResult(202, null, true, '', count);
     });
   }
