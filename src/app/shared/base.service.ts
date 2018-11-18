@@ -9,10 +9,19 @@ export abstract class BaseService<TInstance, TAttributes> {
     return await this.model.create(item);
   }
 
-  protected async getByParam(params: Sequelize.WhereOptions<TAttributes>) {
-    return await this.model.findOne({
-      where: params
-    })
+  protected async getByParams(params: Sequelize.WhereOptions<TAttributes> = null) {
+    const queryParams = [];
+    for(let key in params) {
+      queryParams.push({
+        [key]: {
+          [Sequelize.Op.iLike]: `%${params[key]}%`
+        }
+      })
+    }
+
+    return await this.model.findAll({
+      where: queryParams
+    });
   }
 
   protected async getById(id: number) {

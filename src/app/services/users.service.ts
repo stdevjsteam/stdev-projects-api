@@ -13,9 +13,9 @@ export class UsersService extends BaseService<UsersInstance, UserAttributes> {
     super(model);
   }
 
-  private async createToken(id: number): Promise<string> {
+  private async createToken(id: number, isAdmin): Promise<string> {
     const expiresIn: number = 2592000;
-    return await sign({ id: id }, 'secretKey', { expiresIn: expiresIn});
+    return await sign({ id, isAdmin}, 'secretKey', { expiresIn: expiresIn});
   }
 
   public async login(user: UserAttributes): Promise<IResult> {
@@ -25,7 +25,7 @@ export class UsersService extends BaseService<UsersInstance, UserAttributes> {
           const result = {
             email: existingUser.email,
             isAdmin: existingUser.isAdmin,
-            token: await this.createToken(existingUser.id)
+            token: await this.createToken(existingUser.id, existingUser.isAdmin)
           }
           return this.getResult(200, null, true, '', [result]);
         }

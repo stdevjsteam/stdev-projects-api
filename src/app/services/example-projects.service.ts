@@ -30,6 +30,12 @@ export class ExampleProjectsService extends BaseService<ExampleProjectsInstance,
     });
   }
 
+  public async getAllByParams (queryParams: {[param: string]: string} = null): Promise<IResult> {
+    return this.getByParams(queryParams).then((projects: ExampleProjectsAttributes[]) => {
+      return this.getResult(200, null, true, '', projects);
+    });
+  }
+
   public async removeProject (userId: number, projectId: number): Promise<IResult> {
     return this.removeItem(projectId).then((count: number) => {
       return this.getResult(202, null, true, '', count);

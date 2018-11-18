@@ -23,8 +23,8 @@ export class PublicProjectsService extends BaseService<PublicProjectInstance, Pu
     });
   }
 
-  public async getAllProjects (): Promise<IResult> {
-    return this.getAll().then((projects: PublicProjectsAttributes[]) => {
+  public async getAllByParams (queryParams: {[param: string]: string} = null): Promise<IResult> {
+    return this.getByParams(queryParams).then((projects: PublicProjectsAttributes[]) => {
       return this.getResult(200, null, true, '', projects);
     });
   }
